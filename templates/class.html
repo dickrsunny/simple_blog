@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block pagetitle %}
+  {% for post in post_list %}
+  <title>{{ post.category }}</title>
+  {% endfor %}
+{% endblock %}
+
+{% block content %}
+
+{% for post in post_list %}
+<div class="post">
+  <h2 class="post-title"><a href="{% url 'detail' id=post.id %}"> {{ post.title }}</a></h2>
+   <p class="post-meta">
+      <a class="fa fa-calendar post-category post-category-pure"> {{ post.date_time | date:'Y m d' }}</a>&nbsp&nbsp
+      <a class="fa fa-folder-o post-category" href="{% url 'classification' article_class=post.category %}"> {{ post.category }}</a>&nbsp&nbsp
+      {% for tag in post.tag.all %}
+        <a class="fa fa-tags post-category post-category-pure" href=""> {{ tag }}</a></p>
+      {% endfor %}
+      <br/>
+    </p>
+</div><!-- /.blog-post -->
+{% endfor %}
+
+{% endblock %}

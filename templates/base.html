@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Python,Web">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dick's Blog</title>
+    <link rel="stylesheet" href="/static/monokai.css">
+    <link rel="stylesheet" href="/static/blog.css">
+    <link rel="stylesheet" href="/static/font-awesome.css">
+
+</head>
+<body>
+<div id="container">
+
+
+<div class="header">
+
+    <h1 class="brand-title"><a class="title_color" href="{% url 'home' %}">Dick's Blog</a></h1>
+    <h2 class="brand-tagline">To be a better man</h2>
+ </div>
+
+<div class="nav-list">
+<li id="nav-item-main-page" class="nav-item">
+    <a class="fa fa-home" href="/"> 首页</a>
+</li>
+<li class="nav-item">
+    <a class="fa fa-bars" href="{% url 'archives' %}"> 文章归档</a>
+</li>
+<li class="nav-item">
+    <a class="fa fa-github" href=""> Github</a>
+</li>
+<li class="nav-item">
+    <a class="fa fa-user" href="{% url 'about_me' %}"> 关于博主</a>
+</li>
+<li class="nav-item">
+    <a class="fa fa-rss" href="{% url 'RSS' %}"> RSS</a>
+</li>
+<!--<li class="search">
+    <form class="pure-form" action="/search/" method="get">
+<input class="pure-input-3-3" type="text" name="s" placeholder="搜一下">
+</form>
+</li>-->
+</div>
+
+<div class="content">
+        <div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+
+<div class="push"><!-- not put anything here --></div>
+</div>
+
+<div id="footer" class="footer">
+  Copyright © 2015-2016 <a href="{% url 'home' %}" title="Dick's Blog" target="_blank"> Dick&#039;s   Blog </a> | 吉ICP备15007311 | Powered By Django
+</div>
+
+</body>
+</html>

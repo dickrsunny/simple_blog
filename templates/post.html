@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+
+{% block content %}
+<div>
+        <section class="post">
+            <header>
+                <h2 class="post-title">{{ post.title }}</h2>
+
+                    <p class="post-meta">
+                        <a class="fa fa-calendar post-category" href="#"> {{ post.date_time |date:'Y M d'}}</a>&nbsp&nbsp
+                        <a class="fa fa-folder-o post-category" href="{% url 'classification' article_class=post.category %}"> {{ post.category }}</a>&nbsp&nbsp
+                          {% for tag in post.tag.all %}
+                            <a class="fa fa-tags post-category" href="#"> {{ tag }}</a>
+                          {% endfor %}
+                    </p>
+            </header>
+
+            <div class="post-description">
+                <p>
+                    {{ post.content|custom_markdown }}
+                </p>
+            </div>
+        </section>
+        {% include "duoshuo.html" %}
+</div><!-- /.blog-post -->
+{% endblock %}     

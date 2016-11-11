@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load custom_markdown %}
+{% block content %}
+<div>
+    {% for post in post_list %}
+        <div class="post">
+            <header>
+                <h2 class="post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>
+
+                    <p>
+                        <a class="fa fa-calendar post-category" href="#"> {{ post.date_time |date:'Y M d'}}</a>&nbsp&nbsp
+                        <a class="fa fa-folder-o post-category" href="{% url 'classification' article_class=post.category %}"> {{ post.category }}</a>&nbsp&nbsp
+                    </p>
+            </header>
+
+            <div class="post-description">
+                <p>
+                    {{ post.content|truncatewords_html:10 }}
+                </p>
+            </div>
+
+             {% for tag in post.tag.all %}
+                            <a class="fa fa-tags post-category-tag" href="#"> {{ tag }}</a>&nbsp
+             {% endfor %}
+
+            <a class="read" href="{% url 'detail' id=post.id %}">阅读全文》 </a>
+        </div>
+    {% endfor %}
+    {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+         <div>
+         <ul class="page_num">
+
+      {% if post_list.has_previous %}
+        {{ post_list.previous_page_number }} <a href="?page={{ post_list.previous_page_number }}"> << </a>
+      {% endif %}
+
+      {% if post_list.has_next %}
+        <a href="?page={{ post_list.next_page_number }}"> >> </a> {{ post_list.next_page_number }}
+      {% endif %}
+      </ul>
+        </div>
+    {% endif %}
+
+</div><!-- /.blog-post -->
+{% endblock %}      
+            

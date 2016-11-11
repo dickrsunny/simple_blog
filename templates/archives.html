@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% for post in post_list %}
+        <section class="post">
+            <header>
+                <h2 class="post-title"><a href="{% url 'detail' id=post.id %}">{{ post.title }}</a></h2>
+
+                    <p class="post-meta">
+                        <a class="fa fa-calendar post-category post-category-pure" href="#"> {{ post.date_time |date:'Y M d'}}</a>&nbsp&nbsp
+                        <a class="fa fa-folder-o post-category" href="{% url 'classification' article_class=post.category %}"> {{ post.category }}</a>&nbsp&nbsp
+                          {% for tag in post.tag.all %}
+                            <a class="fa fa-tags post-category post-category-pure" href="#"> {{ tag }}</a>&nbsp&nbsp
+                          {% endfor %}
+                    </p>
+            </header>
+        </section>
+    {% endfor %}
+</div><!-- /.blog-post -->
+{% endblock %}      
